@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  who:
+    build: .
+    labels:
+      - traefik.http.routers.who.rule=Host(`who.shanyue.tech`)
+      - traefik.http.routers.who.tls=true
+      - traefik.http.routers.who.tls.certresolver=le
+    # environments:
+    #   TMUX
+    
+networks:
+  default:
+    external:
+      name: traefik_default
