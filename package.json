@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@webserverless/fc-express": "^0.1.4",
     "nodemon": "^2.0.3",
     "tencent-serverless-http": "^1.1.0"
   },

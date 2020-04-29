@@ -1,0 +1,31 @@
+# 部署在阿里云
+
+ROSTemplateFormatVersion: '2015-09-01'
+Transform: 'Aliyun::Serverless-2018-04-03'
+Resources:
+  whoami-service:
+    Type: 'Aliyun::Serverless::Service'
+    Properties:
+      Description: 'whoami in serverless'
+    whoami-app: # function name
+      Type: 'Aliyun::Serverless::Function'
+      Properties:
+        Handler: ali-faas.handler
+        CodeUri: .
+        Runtime: nodejs10
+        Timeout: 60
+      Events:
+        httpTrigger:
+          Type: HTTP
+          Properties:
+            AuthType: ANONYMOUS
+            Methods: ['POST', 'GET']
+  ali-fun.shanyue.tech: # domain name
+    Type: 'Aliyun::Serverless::CustomDomain'
+    Properties:
+      Protocol: HTTP
+      RouteConfig:
+        Routes: 
+          '/*':
+            ServiceName: whoami-service
+            FunctionName: whoami-app
